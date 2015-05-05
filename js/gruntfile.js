@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jshint: {
-      src: ['test/*.js', 'gruntfile.js', 'main.js'],
+      src: ['test/*.js', 'gruntfile.js', 'server.js'],
       options: {
         globals: {
           describe: true,
@@ -16,12 +16,12 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: ['test/*.js', 'gruntfile.js', 'main.js'],
-        tasks: ['jshint', 'simplemocha'],
+        files: ['test/*.js', 'gruntfile.js', 'server.js'],
+        tasks: ['jshint', 'simplemocha', 'jscs'],
       },
     },
     jscs: {
-      src: ['test/*.js', 'gruntfile.js', 'main.js'],
+      src: ['test/*.js', 'gruntfile.js', 'server.js'],
       options: {
         config: '.jscsrc',
       },
