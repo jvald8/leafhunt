@@ -7,7 +7,9 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "chai": "^2.3.0"
+    "body-parser": "^1.12.3",
+    "chai": "^2.3.0",
+    "express": "^4.12.3"
   },
   "devDependencies": {
     "chai": "^2.3.0",

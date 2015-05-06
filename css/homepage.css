@@ -1,4 +1,10 @@
-.div {
-  background-color:red;
+div.navigation-container{
+  border-color:red;
+}
+p.post_title{
+  color:blue;
+}
+h1{
+  color:green;
 }
 
