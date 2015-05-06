@@ -62,6 +62,16 @@ app.get('/*', function(request, response) {
   response.status(404).send("File not found");
 });
 
+app.post('/user', bodyParser.json(), function(request, response) {
+  console.log(request.body);
+});
+
+app.post('/user/jon', function(request, response) {
+  console.log("Post request has been triggered");
+  response.set('Content-Type', 'text/plain');
+  response.send('POST request to homepage');
+});
+
 app.listen(process.env.PORT || 8000, function() {
   console.log('server started');
 });

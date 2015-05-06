@@ -28,9 +28,9 @@ describe('server', function() {
     });
   });
   it('check to see if greet/[name] returns Hello [name]', function(done) {
-    chai.request('http://localhost:8000').get('/greet/jon').end(
+    chai.request('http://localhost:8000').get('/greet/jon/mr').end(
       function(err, response) {
-      expect(response.text).to.eql('Hello jon');
+      expect(response.text).to.eql('Hey there mr. jon');
       done();
     });
   });
@@ -45,6 +45,13 @@ describe('server', function() {
     chai.request('http://localhost:8000').get('/login').end(
       function(err, response) {
       expect(response).to.have.status(200);
+      done();
+    });
+  });
+  it('if i put in a POST request, it will write out a Post request to homepage', function(done) {
+    chai.request('http://localhost:8000').post('/user/jon').field('_method', 'post').send({password: '123', confirmPassword: '123'}).end(
+      function(err, response) {
+      expect(response.text).to.eql('POST request to homepage');
       done();
     });
   });
