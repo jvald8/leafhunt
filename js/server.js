@@ -1,5 +1,7 @@
 'use strict';
 
+var fs = require('fs');
+
 var http = require('http');
 var url  = require('url');
 
@@ -11,8 +13,9 @@ function onRequest(request, response) {
   var pathnameLength = pathname.length;
   console.log(pathname);
   if (pathname === '/') {
-    response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('This is the homepage');
+    response.writeHead(200, {'Content-Type': 'text/html'});
+    var content = fs.readFileSync('../html/index.html');
+    response.write(content);
   } else if (pathname === '/time') {
     // Should always write the head of a response body first
     response.writeHead(200, {'Content-Type': 'text/plain'});
@@ -25,11 +28,13 @@ function onRequest(request, response) {
     var greetThisName = pathname.substring(greetLength, pathnameLength);
     response.write('Hello ' + greetThisName);
   } else if (pathname.substring(0, 8) === '/signup') {
+    var content = fs.readFileSync('../html/signup.html');
     response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('Please signup!');
+    response.write(content);
   } else if (pathname.substring(0, 7) === '/login') {
+    var content = fs.readFileSync('../html/login.html');
     response.writeHead(200, {'Content-Type': 'text/plain'});
-    response.write('Please login!');
+    response.write(content);
   } else if (pathname) {
     response.writeHead(404, {'Content-Type': 'text/plain'});
     response.write('404 error: File not found.');
