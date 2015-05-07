@@ -52,6 +52,12 @@ app.get('/css/homepage.css', function(request, response) {
   response.send(content);
 });
 
+app.get('/assets/leafr_logo.png', function(request, response) {
+  var content = fs.readFileSync('../assets/leafr_logo.png');
+  response.set('Content-Type', 'image/png');
+  response.send(content);
+});
+
 app.get('/greet/:name/:title', function(request, response) {
   console.log("greet pathname!")
   response.set('Content-Type', 'text/plain');
