@@ -107,4 +107,4 @@ var populateDb = function() {
     db.collection('launches', function(err, collection) {
       collection.insert(launches, {safe:true}, function(err, result) {});
     });
-}
+};
