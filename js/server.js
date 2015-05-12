@@ -1,37 +1,15 @@
-'use strict';
-
-var fs = require('fs');
-var http = require('http');
-var url  = require('url');
-
 var express = require('express');
 var app = express();
+var launches = require('./routes/launches.js');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 
-var madeMiddleware = function(request, response, next) {
-  console.log("From madeMiddleware:" + request.url);
-  next();
-}
-
-var anotherMiddleware = function(request, response, next) {
-  console.log("From anotherMiddleware:" + request.url);
-  next();
-}
-
-app.use(anotherMiddleware);
-
-app.use(madeMiddleware);
+app.use(bodyParser.json());
 
 app.get('/', function(request, response) {
   var content = fs.readFileSync('../html/index.html');
   response.set('Content-Type', 'text/html');
   response.send(content);
-});
-
-app.get('/time', function(request, response) {
-  var currentTime = new Date();
-  response.set('Content-Type', 'text/plain');
-  response.send(currentTime.toDateString());
 });
 
 app.get('/login', function(request, response) {
@@ -64,20 +42,18 @@ app.get('/greet/:name/:title', function(request, response) {
   response.send("Hey there " + request.params.title + ". " + request.params.name);
 });
 
+
+app.get('/launches', launches.findAll);
+app.get('/launches/:id', launches.findById);
+app.post('/launches', launches.addLaunch);
+app.put('/launches/:id', launches.updateLaunch);
+app.delete('/launches/:id', launches.deleteLaunch);
+
 app.get('/*', function(request, response) {
   response.status(404).send("File not found");
 });
 
-app.post('/user', bodyParser.json(), function(request, response) {
-  console.log(request.body);
-});
-
-app.post('/user/jon', function(request, response) {
-  console.log("Post request has been triggered");
-  response.set('Content-Type', 'text/plain');
-  response.send('POST request to homepage');
-});
 
 app.listen(process.env.PORT || 8000, function() {
-  console.log('server started');
+  console.log('server started on port 8000');
 });
