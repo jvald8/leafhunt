@@ -1,4 +1,7 @@
-var express = require('express');
+var serverApp = require('./routes/server-app.js')
+
+serverApp.appInstance.listen(8000);
+/*var express = require('express');
 var app = express();
 var launches = require('./routes/launches.js');
 var bodyParser = require('body-parser');
@@ -56,4 +59,4 @@ app.get('/*', function(request, response) {
 
 app.listen(process.env.PORT || 8000, function() {
   console.log('server started on port 8000');
-});
+});*/
